@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="row lista">
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        Persona Nueva
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Nombre</span>
+            </div>
+            <input name="nombre" type="text" class="form-control" aria-describedby="basic-addon1">
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Correo</span>
+            </div>
+            <input name='correo' type="text" class="form-control" aria-describedby="basic-addon1">
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Edad</span>
+            </div>
+            <input name='edad' type="text" class="form-control" aria-describedby="basic-addon1">
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <button id="anadir" type="button" class="btn btn-primary" onclick="anadirNuevo()">Añadir nuevo</button>
+  
+
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
