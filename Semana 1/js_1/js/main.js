@@ -59,18 +59,18 @@ function elUsuarioEsMayorQueLosTres(p1, p2, p3) {
 // RESTRICCIÓN: Resuélvelo usando los métodos .indexOf() ó .lastIndexOf()
 // Deja descomentada solo una de las soluciones
 
-// function cuantosTienenCorreoDeGmailDotCom(p1, p2, p3) {
-//     var counter = 0;
-//     if (p1.email.indexOf('@gmail.com') != -1) {
-//         counter++;
-//         console.log('Estoy aquí ' + counter);
-//     } if (p2.email.indexOf('@gmail.com') != -1) {
-//         counter++;
-//     } if (p3.email.indexOf('@gmail.com') != -1) {
-//         counter++;
-//     }
-//     return counter;
-// }
+function cuantosTienenCorreoDeGmailDotCom(p1, p2, p3) {
+    var counter = 0;
+    if (p1.email.indexOf('@gmail.com') != -1) {
+        counter++;
+        console.log('Estoy aquí ' + counter);
+    } if (p2.email.indexOf('@gmail.com') != -1) {
+        counter++;
+    } if (p3.email.indexOf('@gmail.com') != -1) {
+        counter++;
+    }
+    return counter;
+}
 
 
 // function cuantosTienenCorreoDeGmailDotCom(p1, p2, p3) {

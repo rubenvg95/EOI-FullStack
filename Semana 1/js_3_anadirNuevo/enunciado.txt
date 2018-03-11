@@ -1,0 +1,17 @@
+Reglas
+Valida que los campos están bien antes de introducirlo en el array.
+No permitas usuarios con el mismo correo dentro del array.
+Hoja en blanco y tira de mucho internet, para eso está.
+Usa bootstrap u otra librería si lo deseas oblitagoriamente, no gastes más de un 10% de tu tiempo en el estilo
+No se pueden métodos de más de 10 líneas.
+
+Extras
+Pinta de rojo los inputs no válidos.
+Añade un icono de borrado en los usuarios de la lista y al pulsarlo elimínalo tanto de la pantalla como de la memoria.
+Añade un input a la derecha y un botón con una lupa. Servirá para buscar, de manera que al introducir algo y pinchar en la lupa solo saldrán en la pantalla aquellos cuyo nombre contenga la ristra introducida.
+Si algo va mal, crea una zona en el html para mostrar mensajes de errores, como por ejemplo si las validaciones no pasan.
+
+Realiza la mayoría de los extras anteriores si no te dio tiempo.
+Cuando el usuario tiene un error en algún campo, muestra un mensaje de alerta en la pantalla. Haz que al cabo de 3 segundos se vaya con una animación, y 1 segundo más tarde lo eliminas del html.
+Almacena los usuarios almacenados en local.
+Detecta que hay cambios en los inputs y guarda también en local una versión de lo que hay en el nuevo usuario para que al refrescar sus datos sigan como lo dejaste.

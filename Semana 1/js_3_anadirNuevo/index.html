@@ -10,6 +10,17 @@
 </head>
 
 <body>
+
+  <nav class="navbar navbar-light bg-light justify-content-between">
+    <div class="input-group inline ">
+      <a class="navbar-brand inline">Anotador de personas</a>
+      <input id="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" aria-label="Search">
+      <button  class="btn btn-outline-success my-2 my-sm-0" onclick="buscarPorNombre()">Buscar</button>
+    </div>
+  </nav>
+
+  <div id="zona" class="d-none alert alert-danger" role="alert"></div>
+
   <div class="row lista">
     <div class="card" style="width: 18rem;">
       <div class="card-header">
@@ -45,7 +56,7 @@
   </div>
 
   <button id="anadir" type="button" class="btn btn-primary" onclick="anadirNuevo()">Añadir nuevo</button>
-  
+
 
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
   <script src="js/main.js"></script>

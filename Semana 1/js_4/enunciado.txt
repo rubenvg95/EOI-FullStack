@@ -1,0 +1,4 @@
+INVESTIGA COMO FUNCIONA LA PÁGINA https://jsonplaceholder.typicode.com/ 
+Sobre el ejercicio anterior, nada más comenzar, realiza un get al recurso /users que te 
+proporcionan y crea dichos usuarios como primeros usuarios. (Como no tienen edad ponles un 
+valor random del 20 al 45 al guardarlos). 

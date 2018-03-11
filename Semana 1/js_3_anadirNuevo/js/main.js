@@ -78,7 +78,7 @@ function getPersonForm() {
 }
 
 function multiplicar(persona) {
-    $('input').prop('disabled', true);
+    $('.row input').prop('disabled', true);
     $('.lista').prepend(primeraCard);
     //console.log('multiplicar(persona) '+ persona.nombre);
     $('.card:nth-child(2) .card-header').text(persona.nombre);
@@ -91,6 +91,7 @@ function anadirNuevo() {
     var persona = getPersonData();
     var personaForm = getPersonForm();
     var objetoValidador = validador(persona);
+    var errores = objetoValidador.errors
     var correoDuplicado = false;
     clearErrors(personaForm);
     if (objetoValidador.valid) {
@@ -99,6 +100,7 @@ function anadirNuevo() {
         } else {
             arrayValidados.forEach(element => {
                 if (persona.correo === element.correo) {
+                    activateRedZone(error = [{ text: 'Correo repetido' }]);
                     personaForm.correo.addClass('is-invalid');
                     correoDuplicado = true;
                     return;
@@ -109,9 +111,7 @@ function anadirNuevo() {
         if (!correoDuplicado) {
             multiplicar(persona);
         }
-
     } else {
-        var errores = objetoValidador.errors
         errores.forEach(error => {
             switch (error.code) {
                 case "name_invalid":
@@ -130,16 +130,37 @@ function anadirNuevo() {
                     console.log('No se, pero la has liado');
             }
         });
+        console.log(errores);
+        activateRedZone(errores);
 
     }
-    //console.log(arrayValidados);
 }
 
-
+function activateRedZone(errores) {
+    $('#zona').removeClass('d-none');
+    var string = "";
+    errores.forEach(error => {
+        string += '<p>' + error.text + '</p>';
+    });
+    $('#zona').append(string);
+}
 
 function clearErrors(personaForm) {
+    $('#zona').addClass('d-none');
+    $('#zona').text('');
     personaForm.nombre.removeClass('is-invalid');
     personaForm.correo.removeClass('is-invalid');
     personaForm.edad.removeClass('is-invalid');
 }
 
+function buscarPorNombre() {
+    var palabra = $('#buscar').val();
+    if (palabra != '') {
+        console.log('La palabra a buscar es ' + palabra);
+    }
+    var html = $('.row').html();
+    console.log(html);
+   
+
+
+}

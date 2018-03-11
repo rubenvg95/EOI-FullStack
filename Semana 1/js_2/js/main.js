@@ -58,7 +58,7 @@ function ejercicio02(email) {
     if (contador == 0) {
         cadena += ". Además, no contiene ninguna letra M";
     } else {
-        cadena += "Además, contiene " + contador + " letras M";
+        cadena += ". Además, contiene " + contador + " letras M";
     }
 
     return cadena;
@@ -161,17 +161,26 @@ function ejercicio05(user) {
     var edad = parseInt(user.edad);
     var correo = user.correo;
 
+    var textoDevolver = "La persona introducida pudiera ser Yunior. Ya que tiene";
+
     if (nombre === yunior.nombre && edad === yunior.edad && correo === yunior.correo) {
         return "La persona introducida es Yunior";
     } else if (nombre != yunior.nombre && edad != yunior.edad && correo != yunior.correo) {
         return "La persona introducida no es Yunior";
-    } else if (nombre === yunior.nombre) {
-        return "La persona introducida pudiera ser Yunior. Ya que tiene el mismo nombre";
-    } else if (edad === yunior.edad) {
-        return "La persona introducida pudiera ser Yunior. Ya que tiene la misma edad";
-    } else {
-        return "La persona introducida pudiera ser Yunior. Ya que tiene el mismo correo";
     }
+
+    if (nombre === yunior.nombre) {
+        textoDevolver += " el mismo nombre";
+    }
+    if (edad === yunior.edad) {
+        textoDevolver += " la misma edad";
+    }
+    if (correo === yunior.correo) {
+        textoDevolver += " el mismo correo";
+    }
+
+    return textoDevolver;
+
 }
 
 
@@ -238,29 +247,22 @@ function ejercicio06(user) {
     var error;
 
     //     Valida que su nombre tiene mínimo 5 caracteres y un máximo de 60.
-    if (nombre.length >= 5 && nombre.length <= 60) {
-
-    } else {
+    if (!(nombre.length >= 5 && nombre.length <= 60)) {
         error = { code: 'name_invalid_min_length', text: 'El nombre ' + nombre + ' debe contener entre 5 y 60 caracteres' };
         errors.push(error);
     }
     //     Valida que su email tiene mínimo 7 caracteres y máximo 60.
-    if (correo.length >= 7 && correo.length <= 60) {
-
-    } else {
+    if (!(correo.length >= 7 && correo.length <= 60)) {
         error = { code: 'email_invalid_min_length', text: 'El correo ' + correo + ' debe contener entre 7 y 60 caracteres' };
         errors.push(error);
     }
     //     Valida que edad es superior a los 5 años y menor de 150.
-    if (edad >= 5 && edad <= 150) {
-
-    } else {
+    if (!(edad >= 5 && edad <= 150)) {
         error = { code: 'age_invalid', text: 'O eres muy pequeño o muy viejo' };
         errors.push(error);
     }
     //     Valida que su nombre solo contiene letras o espacios.
-    if (nombre.match(/^[A-Za-z ]+$/)) {
-    } else {
+    if (!(nombre.match(/^[A-Za-z ]+$/))) {
         error = { code: 'name_invalid', text: 'Tu nombre debe contaner solo letras o espacios' };
         errors.push(error);
     }
@@ -271,9 +273,7 @@ function ejercicio06(user) {
     if (index == -1) {
         error = { code: 'email_noAt', text: 'Tu correo no contiene @' };
         errors.push(error);
-    } else if (index - 1 >= 0 && index + 1 <= correo.length - 1) {
-
-    } else {
+    } else if (!(index - 1 >= 0 && index + 1 <= correo.length - 1)) {
         error = { code: 'email_noAtBeforeAfter', text: 'Tu correo no contiene nada antes o despues del arroba' };
         errors.push(error);
     }
@@ -333,8 +333,8 @@ function ejercicio06(user) {
 
 
 // De manera, que si pulsamos varias veces en el botón de iniciar con nuevos datos de personas, se irán mostran todos los nuevos usuarios . 
+
 function ejercicio07(users) {
-    console.log(users);
     var arrayValidados = [];
     var arrayUsersErrors = [];
     var ids = [];
@@ -351,18 +351,16 @@ function ejercicio07(users) {
             ids.push(objetoValidado.id)
             arrayValidados.push(objetoValidado);
         } else {
+            user.errors = objetoDevueltoEje6.errors;
             arrayUsersErrors.push(user);
         }
     }
-
     var objetoADevolver = {
         items_inserted: arrayValidados.length,
         ids: ids,
         with_errors: arrayUsersErrors,
         user_stored: arrayValidados
     }
-
-
     return objetoADevolver;
 }
 

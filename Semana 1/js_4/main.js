@@ -1,3 +1,7 @@
+// //console.log(correos);
+// //Ejercicio 1: En la base de datos de nuestra empresa hay usuarios con correos 
+//acabados en "gmail.com". Encuéntralos y descártalos, son un problema.
+
 // let correos = [
 //     { usuario: 'JoseElMaquina', email: 'jose.el.maquina@gmail.com' },
 //     { usuario: 'PepeElCorrecto', email: 'pepe@corecto.com' },
@@ -6,12 +10,16 @@
 //     { usuario: 'Elcarterista', email: 'elcarterista20@gmail.com' }
 // ];
 
-// //console.log(correos);
-// //Ejercicio 1
 // var correosNoGmail = correos.filter(usr => !usr.email.endsWith('gmail.com'));
+
 // //console.log(correosNoGmail);
 
-// //Ejercicio 2
+// //Ejercicio 2 Una empresa de robótica tiene diferentes modelos de procesadores y 
+//quiere mostrarlos en su web. Cada procesador tiene un atributo que indica la cantidad 
+//de operaciones por segundo y otro que indica la tasa de fallos en tanto por ciento. Ordénalos 
+//por el número de operaciones por segundo de forma descendente y elimina los que tengan un 
+//porcentaje de fallos mayor al 50%.
+
 // let procesadores = [
 //     { modelo: 'pentiumII', operacionesPorSegundo: 10500, tasaDeFallos: 15 },
 //     { modelo: 'i7', operacionesPorSegundo: 20000, tasaDeFallos: 60 },
@@ -24,7 +32,9 @@
 // var procesadoresMenores50porCiento = procesadores.filter(procesador => procesador.tasaDeFallos > 50);
 // //console.log(procesadoresMenores50porCiento.sort());
 
-// //Ejercicio 3
+// //Ejercicio 3 En nuestra página de alojamientos, los usuarios valoran el sitio donde se han 
+//quedado dándole una puntuación del 1 al 10. El problema es que no sabemos la media de valoración
+//de cada alojamiento. Crea un atributo "media" para cada alojamiento e incluye su valor.
 
 // let alojamientos = [
 //     {
@@ -115,7 +125,7 @@
 
 // console.log(alojamientosConAtributoMedia)
 
-//SOLUCION 4 / PUTO AMO
+//SOLUCION 4 / 
 // alojamientos.forEach(
 //     alojamiento =>
 //     alojamiento.media =
