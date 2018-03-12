@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Trivago clon</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light grid_fullview">
+        <a class="navbar-brand" href="#">Mi copia fea de Trivago</a>
+        <a class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+            <div id="buscador">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <a class="btn btn-outline-success my-2 my-sm-0" href="#" type="submit">Buscar</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="grid">
+        <div class="grid_contentview main-box">
+            <div class="subgrid--content">
+                <div class="barra-lateral">
+                    hola
+                </div>
+                <div class="photo-section">
+                    <div class="photo-subgrid">
+                        
+                    </div>
+                </div>
+            </div>
+    </main>
+    <div class="page-selector">
+        <ul class="menu">
+            <li><a onclick="navigateTo(event, 'first')" id="first-page-button" href="#">&lt;&lt;</a></li>
+            <li><a onclick="navigateTo(event, 'previous')" id="previous-page-button" href="#">&lt;</a></li>
+            <div class="enlaces"></div>
+            <li><a  onclick="navigateTo(event, 'next')" id="next-page-button" href="#">&gt;</a></li>
+            <li><a onclick="navigateTo(event, )" id="last-page-button" href="#">&gt;&gt;</a></li>
+        </ul>
+    </div>
+    <footer class="grid_fullview">
+        Aqui va el footer!
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/data_loader.js"></script>
+    <script src="js/displayer.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/filters.js"></script>
+</body>
+
+</html>

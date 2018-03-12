@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+*{
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+        
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: minmax(1em, 1fr) minmax(0, 100em) minmax(1em, 1fr);    
+}
+
+.grid_fullview{
+    grid-column: 1/-1;
+
+}
+
+.grid_contentview{
+    grid-column: 2/3;
+}
+
+.subgrid--content{
+    display: grid;
+    grid-template-columns: 1fr 3fr; 
+}
+
+.barra-lateral{
+    grid-column: 1/2;
+    background-color: goldenrod;
+}
+
+.photo-section{
+    grid-column: 2/-1;
+}
+
+.photo-subgrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.main-box{
+    background-color: rgb(135, 141, 222)
+}
+
+#buscador{
+    width: 20em;
+    display: flex
+}
+
+.photo-file{
+	display: block;
+	border: 0;
+	width: 100%;
+	height: auto;
+}
+
+.page-selector{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.menu li{
+    display: inline;
+}
+
+.enlaces{
+    display: inline;
+}
+
+footer{
+    background-color: aquamarine;
+    text-align: center;
+    height: 50px;
+}
