@@ -27,17 +27,28 @@
                 </li>
             </ul>
             <div id="buscador">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <a class="btn btn-outline-success my-2 my-sm-0" href="#" type="submit">Buscar</a>
+                <input class="form-control mr-sm-2" name="buscadorInput" placeholder="Search" aria-label="Search">
+                <a onclick="buscar(event)" class="btn btn-outline-success my-2 my-sm-0" href="#">Buscar</a>
             </div>
         </div>
     </nav>
 
     <main class="grid">
         <div class="grid_contentview main-box">
+            <div class="total-searches"></div>
             <div class="subgrid--content">
                 <div class="barra-lateral">
-                    hola
+                        Ordenar por:<br>
+                        <input type="radio" name="ordenarPor" value="mejorValorados" />Mejor valorados
+                        <br>
+                        <input type="radio" name="ordenarPor" value="mayorComentarios" />Mayor número de comentarios
+                        <br>
+                        <input type="radio" name="ordenarPor" value="top10" />Top 10
+                        <br>
+                        <a onclick="ordenarPor(event)" class="btn btn-secondary btn-sm" href="#">Ordenar</a><br>
+                        Buscar por nota determinada<br>
+                        0<input type="range" min="0" max="10" value="7" step="1">10<br>
+                        <a onclick="filtrarPorNota(event)" class="btn btn-secondary btn-sm" href="#">Filtrar</a><br>
                 </div>
                 <div class="photo-section">
                     <div class="photo-subgrid">
@@ -52,7 +63,7 @@
             <li><a onclick="navigateTo(event, 'previous')" id="previous-page-button" href="#">&lt;</a></li>
             <div class="enlaces"></div>
             <li><a  onclick="navigateTo(event, 'next')" id="next-page-button" href="#">&gt;</a></li>
-            <li><a onclick="navigateTo(event, )" id="last-page-button" href="#">&gt;&gt;</a></li>
+            <li><a onclick="navigateTo(event, 'last')" id="last-page-button" href="#">&gt;&gt;</a></li>
         </ul>
     </div>
     <footer class="grid_fullview">
