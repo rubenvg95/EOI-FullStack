@@ -77,11 +77,6 @@ body{
 
 }
 
-.actual-page{
-    color: red;
-    font-size: 20px;
-}
-
 .rating-box{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -90,6 +85,10 @@ body{
 
 .box{
     grid-column: 1/2;
+    background-color: rgba(248, 155, 155, 0.836);
+}
+
+.green{
     background-color: forestgreen;
 }
 
@@ -100,6 +99,11 @@ body{
 
 .enlaces{
     display: inline;
+}
+
+.actual-page{
+    color: red;
+    font-size: 20px;
 }
 
 footer{
