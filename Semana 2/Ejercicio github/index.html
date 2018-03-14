@@ -38,32 +38,48 @@
             <div class="total-searches"></div>
             <div class="subgrid--content">
                 <div class="barra-lateral">
-                        Ordenar por:<br>
-                        <input type="radio" name="ordenarPor" value="mejorValorados" />Mejor valorados
+                    <div class="menu-lateral">
+                        Ordenar por:
                         <br>
-                        <input type="radio" name="ordenarPor" value="mayorComentarios" />Mayor número de comentarios
-                        <br>
-                        <input type="radio" name="ordenarPor" value="top10" />Top 10
-                        <br>
-                        <a onclick="ordenarPor(event)" class="btn btn-secondary btn-sm" href="#">Ordenar</a><br>
-                        Buscar por nota determinada<br>
-                        0<input id="slider" type="range" min="0" max="10" value="5" step="1">10<br>
-                        <a onclick="filtrarPorNota(event)" class="btn btn-secondary btn-sm" href="#">Filtrar</a><br>
+                        <div class="mejorValorados">
+                            <input type="radio" name="ordenarPor" value="mejorValorados" /> Mejor valorados
+                        </div>
+                        <div class="mayorComentarios">
+                            <input type="radio" name="ordenarPor" value="mayorComentarios" /> Mayor número de comentarios
+                        </div>
+                        <div class="top10">
+                            <input type="radio" name="ordenarPor" value="top10" /> Top 10</div>
+                        <a onclick="ordenarPor(event)" class="btn btn-secondary btn-sm" href="#">Ordenar</a>
+                        Buscar por nota determinada
+                        <div class="range-nota">
+                            0<input id="slider" type="range" min="0" max="10" value="5" step="1">10
+                        </div>
+
+                        <a onclick="filtrarPorNota(event)" class="btn btn-secondary btn-sm" href="#">Filtrar</a>
+                    </div>
                 </div>
                 <div class="photo-section">
                     <div class="photo-subgrid">
-                        
+
                     </div>
                 </div>
             </div>
     </main>
     <div class="page-selector">
         <ul class="menu">
-            <li><a onclick="navigateTo(event, 'first')" id="first-page-button" href="#">&lt;&lt;</a></li>
-            <li><a onclick="navigateTo(event, 'previous')" id="previous-page-button" href="#">&lt;</a></li>
+            <li>
+                <a onclick="navigateTo(event, 'first')" id="first-page-button" href="#">&lt;&lt;</a>
+            </li>
+            <li>
+                <a onclick="navigateTo(event, 'previous')" id="previous-page-button" href="#">&lt;</a>
+            </li>
             <div class="enlaces"></div>
-            <li><a  onclick="navigateTo(event, 'next')" id="next-page-button" href="#">&gt;</a></li>
-            <li><a onclick="navigateTo(event, 'last')" id="last-page-button" href="#">&gt;&gt;</a></li>
+            <li>
+                <a onclick="navigateTo(event, 'next')" id="next-page-button" href="#">&gt;</a>
+            </li>
+            <li>
+                <a onclick="navigateTo(event, 'last')" id="last-page-button" href="#">&gt;&gt;</a>
+            </li>
         </ul>
     </div>
     <footer class="grid_fullview">
@@ -71,7 +87,6 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.js"></script>
-    <script src="js/index.js"></script>
     <script src="js/data_loader.js"></script>
     <script src="js/displayer.js"></script>
     <script src="js/events.js"></script>
