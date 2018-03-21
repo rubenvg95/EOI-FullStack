@@ -1,0 +1,21 @@
+[
+    {
+        "id": 1,
+        "username": "admin",
+        "name": "Administrator",
+        "email": "admin@micopiafeadetwitter.es",
+        "tweets": [
+            {
+                "id": 11,
+                "text": "Hola mundo",
+                "owner": "admin",
+                "createdAt": "hoy"
+            },
+            {
+                "id": 12,
+                "text": "Adios mundo",
+                "owner": "admin",
+                "createdAt": "ayer"
+            }]
+    }
+]

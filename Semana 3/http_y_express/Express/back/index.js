@@ -1,11 +1,24 @@
-const http = require('http');
+// Deberán estar implementadas las funcionalidades de:
+// Crear un nuevo usuario*
+// Borrar un usuario *
+// Editar el email de un usuario o el nombre (PATCH)*
+// Subir un tweet nuevo por parte de un usuario*
+// Ir a buscar un tweet en concreto por su id*
+// Borrar un tweet por su id
+// Obtener todos los tweets ordenados tanto asc como desc por la fecha de subida
+// Dar persistencia a los datos mediante ficheros
+
+//Al inicar el proyecto hacer node init
+//npm i [+ nombre del paquete, que puede ser http, express, lodash, fs,,...]
+
+const fs = require('fs');
 const express = require('express');
 const _ = require('lodash');
 var app = express();
 var users = [];
 app.use(express.json());
 var user = {};
-var today = new Date();
+
 
 
 function createUserDummy() {
@@ -19,13 +32,13 @@ function createUserDummy() {
                 id: guid(),
                 text: "Hola mundo",
                 owner: "admin",
-                createdAt: today,
+                createdAt: Date.now(),
             },
             {
                 id: guid(),
                 text: "Adios mundo",
                 owner: "admin",
-                createdAt: today,
+                createdAt: Date.now() + 1,
             }]
     }
     users.push(user);
@@ -161,7 +174,7 @@ app.post('/tweet/:username', function (req, res) {
                 id: guid(),
                 text: tweet.text,
                 owner: userToAddTweet.username,
-                createdAt: today,
+                createdAt: Date.now(),
             }
             usuario.tweets.push(introducir);
             return res.send('Se ha añadido')
@@ -172,19 +185,57 @@ app.post('/tweet/:username', function (req, res) {
 });
 
 
-app.get('/tweet/:id', function(req, res){
-    const tweetID =  req.params.id;
+app.get('/tweet/:id', function (req, res) {
+    const tweetID = req.params.id;
     var encontrado = [];
-    users.forEach(user=>{
+    users.forEach(user => {
         encontrado = user.tweets.find(tweet => tweet.id == tweetID);
     })
-    if (encontrado!=null){
+    if (encontrado != null) {
         return res.send(encontrado);
-    }else{
+    } else {
         return res.send('No hay Tweets con ese ID')
     }
-        
+
 })
+
+
+app.delete('/tweet/:id', (req, res) => {
+    const tweetID = req.params.id;
+    var encontrado = false;
+    users.forEach((user, index) => {
+        encontrado = user.tweets.filter(tweet => tweet.id != tweetID);
+        if (encontrado.length != 0) {
+            user.tweets = encontrado;
+            return res.send('Eliminado');
+        }
+    })
+    console.log(encontrado);
+})
+
+
+app.get('/tweet', (req, res) => {
+    const ordenar = req.query.order;
+    var allTweets = _.flatten(users.map(user => user.tweets));
+    allTweets = _.orderBy(allTweets, ['createdAt'], ordenar)
+    return res.send(allTweets);
+})
+
+
+// var fileUrl = 'data/users.json';
+
+// fs.readFile(fileUrl, (err, data) => {
+
+//     if (err) {
+//         console.log('Err', err);
+//         return;
+//     }
+//     console.log(data) // A lot of shit
+
+//     var json = JSON.parse(data);
+//     console.log(json);
+
+// })
 
 /** 
 var encontrado = users.some(user => user.username == usernameToFind);
