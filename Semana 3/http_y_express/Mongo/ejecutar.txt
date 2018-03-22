@@ -1,0 +1,6 @@
+Ejecutar el servidor:
+
+C:\Program Files\MongoDB\Server\3.6\bin> .\mongod.exe --dbpath C:\Users\ruben\Documents\mongoData\db
+
+Ejecutar la consola:
+C:\Program Files\MongoDB\Server\3.6\bin\mongo.exe
