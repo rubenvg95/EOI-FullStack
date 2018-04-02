@@ -1,21 +1,29 @@
 [
     {
-        "id": 1,
+        "id": "edaa2567-f1c1-d907-1250-a0e3cb615b7a",
         "username": "admin",
         "name": "Administrator",
         "email": "admin@micopiafeadetwitter.es",
+        "register": 1521747473615,
         "tweets": [
             {
-                "id": 11,
+                "id": "122",
                 "text": "Hola mundo",
                 "owner": "admin",
-                "createdAt": "hoy"
+                "createdAt": 1521747473614
             },
             {
-                "id": 12,
+                "id": "133",
                 "text": "Adios mundo",
                 "owner": "admin",
-                "createdAt": "ayer"
-            }]
+                "createdAt": 1521747473615
+            }
+        ]
+    },
+    {
+        "id": "8b97c540-aa28-40e2-c3fd-d0ac951eb17c",
+        "username": "rubenvg95",
+        "email": "blbbj",
+        "register": 1521747573206
     }
 ]

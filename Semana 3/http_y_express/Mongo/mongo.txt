@@ -1,0 +1,23 @@
+use pruebas
+
+db.TODOS.find().count()
+
+db.TODOS.find({userId:6}).count()
+
+db.TODOS.find({id : {$gt: 140 }}).count()
+
+db.TODOS.find({completed : true}).count()
+
+ db.TODOS.update({userId : 5}, {$set: {completed: true}}, {multi: true})
+ 
+ db.TODOS.update({}, { $rename: { "title" : "content"}}, {multi: true})
+ 
+ db.TODOS.find().sort({id:-1}).limit(10)
+ 
+ db.TODOS.find().sort({id:-1}).limit(5).map(user => `El todo con el texto ${user.content} pertenece al usuario con id: ${user.id}`)
+ 
+ d.TODOS.insert({
+	"userId" : 5, "id" : 88, "completed" : true, "content" : "vitae aut excepturi laboriosam sint aliquam et et accusantium" 
+ })
+ 
+ 
