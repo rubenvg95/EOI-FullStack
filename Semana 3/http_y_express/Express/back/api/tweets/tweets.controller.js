@@ -1,7 +1,6 @@
 const functions = require('../utils/functions.js')
 const _ = require('lodash');
 var users = functions.users;
-guid = functions.guid;
 saveUser = functions.saveUser;
 checkUser = functions.checkUser;
 

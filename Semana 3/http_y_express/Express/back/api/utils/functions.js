@@ -1,80 +1,70 @@
-const fs = require('fs');
 const urlData = 'data/users.json'
-var users = JSON.parse(fs.readFileSync(urlData));
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/Twitter');
+
+var userSchema = mongoose.Schema({
+    username: {
+        type: String,
+        require: [true, 'El campo username es necesario']
+    },
+    name: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    register: {
+        type: Number
+    },
+    tweets: [{
+        owner: String,
+        text: {
+            type: String,
+            require: [true, 'Tienes que escribir algo']
+        },
+        createdAt: Number
+    }],
+    versionKey: false,
+});
+
+var user = mongoose.model('users', userSchema);
 
 module.exports = {
-    users: users,
-    guid: guid,
+    users: user,
     saveUser: saveUser,
     checkUser: checkUser
 }
 
-/**
- * Almacenar usuarios en fichero
- *  function cargarUsers(){
-    var content = fs.readFileSync(urlData, 'utf-8');
-    console.log(JSON.parse(content))
-}
- */
-
-function createUserDummy() {
-    var user = {
-        id: "111",
-        username: "admin",
-        name: "Administrator",
-        email: "admin@micopiafeadetwitter.es",
-        register: Date.now(),
-        tweets: [
-            {
-                id: "122",
-                text: "Hola mundo",
-                owner: "admin",
-                createdAt: Date.now(),
-            },
-            {
-                id: "133",
-                text: "Adios mundo",
-                owner: "admin",
-                createdAt: Date.now() + 1,
-            }]
-    }
-    saveUser(user);
-}
-
-createUserDummy();
-
-//By https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
-function guid() {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-}
-
 function saveUser(newUser) {
-    if (checkUser(newUser) || newUser.email == "") {
+    // if (checkUser(newUser) || newUser.email == "") {
+    if (false) {
         return false;
     } else {
-        var usuario = {
-            id: guid(),
+        var usuario = new user({
             username: newUser.username,
             name: newUser.name,
             email: newUser.email,
             register: Date.now(),
             tweets: newUser.tweets
-        }
-        users.push(usuario);
-        fs.writeFile(urlData, JSON.stringify(users));
+        })
+        console.log(usuario);
+        //var error = usuario.validateSync();
+        user.create({}, (err, usuario) => {
+            console.log('por aqui si pasa')
+            return true;
+        })
         return true;
     }
 }
 
 function checkUser(usuario) {
-    if (users.some(user => user.username == usuario.username) || usuario.email == "") {
-        return true;
-    } else {
-        return false;
-    }
+    // if (users.some(user => user.username == usuario.username) || usuario.email == "") {
+    //     return true;
+    // } else {
+    //     return false;
+    // }
+    user.find({ username: usuario.username }, (err, res) => {
+        console.log('por aqui pasa')
+        console.log(res);
+    })
 }

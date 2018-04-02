@@ -1,6 +1,5 @@
 const functions = require('../utils/functions.js');
 var users = functions.users;
-guid = functions.guid;
 saveUser = functions.saveUser;
 checkUser = functions.checkUser;
 
@@ -19,12 +18,16 @@ module.exports.modifyUser = modifyUser;
 module.exports.getUser = getUser;
 
 function getAllUsers(req, res) {
-    console.log('Han llamado a users');
-    res.json(users);//es lo mismo que poner res.json(users)
+    console.log('getAllUsers')
+    users.find({}, (err, response) => {
+        res.json(response)
+    })
 }
 
 function createNewUSer(req, res) {
+    console.log('createNewUSer')
     const newUser = req.body;
+    console.log(newUser)
     if (saveUser(newUser)) {
         return res.json(newUser);
     } else {
@@ -90,12 +93,8 @@ function getUser(req, res) {
     const userToFind = {
         username: req.params.username
     }
-    console.log(userToFind);
-    if (checkUser(userToFind)) {
-        var encontrado = users.find(user => user.username == userToFind.username);
-        console.log(encontrado);
-        return res.json(encontrado);
-    } else {
-        return res.json('No se encuntra al usuario')
-    }
+    console.log('getUser')
+    users.find({ username: userToFind.username }, (err, response) => {
+        res.json(response)
+    })
 }
