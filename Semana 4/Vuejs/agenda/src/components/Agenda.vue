@@ -1,5 +1,9 @@
 
-<!-- Soy un comentario -->
+<!-- Soy un comentario 
+Para iniciar, vue init webpack agenda (u otro nombre)
+Para ejecutar, usar npm run dev
+
+-->
 
 <!-- Pancho : "Resulta que yo normalmente tengo una agendita donde 
 voy anotando en cada fila pues el nombre de un contacto y su correo 
@@ -17,7 +21,7 @@ que es digital pues también podrías ponerle las siguientes opciones:-->
 
 *Que pueda eliminar una fila de la lista (ojo, eliminarla no marcarla como contactada).
 
-Que pueda editar un elemento de la lista.
+*Que pueda editar un elemento de la lista.
 
 *Que valides que he metido un nombre de más de 6 letras, que a veces se me olvida poner su nombre.
 
@@ -28,7 +32,7 @@ Que pueda editar un elemento de la lista.
 <template>
   <div class="agenda">
     <input id="nombre" type="text"  placeholder="Añadir nombre" v-model="contact.name">
-    <input id="email" type="text" placeholder="Añadir Correo" v-model="contact.email"@keyup.enter="checkMail(contact.email)">
+    <input id="email" type="text" placeholder="Añadir Correo" v-model="contact.email"@keyup.enter="checkMail(contact)">
     <button v-if="!showed"  @click.prevent="showAllCalled">Show called</button>
     <button v-else @click.prevent="hideCalled">Hide called</button>
     <button @click.prevent="hideAll">Hide/Show All</button>
@@ -77,21 +81,36 @@ export default {
     };
   },
   methods: {
-    addContact() {
+    addContact(contacto) {
       console.log("Añadir contacto");
-      this.contacts.push(this.contact);
-      this.contact = {};
+      this.contacts.push(contacto);
+      this.contact = {
+        name: "",
+        email: "",
+        called: false,
+        visible: true
+      };
       console.log(this.contacts);
     },
     called() {
       console.log("Contacto marcado como llamado");
     },
-    checkMail(email) {
-      if (
-        !this.contacts.some(contact => contact.email === email) &&
-        this.checkNameLength(this.contact.name)
+    checkMail(contacto) {
+      if (!this.checkNameLength(this.contact.name)) {
+        return;
+      }
+      if (this.isEditing) {
+        console.log("Vamos a editar a " + this.isEditing);
+        var contactoBuscado = this.contacts.find(contactToFind => {
+          return this.isEditing == contactToFind.email;
+        });
+        contactoBuscado.name = contacto.name;
+        contactoBuscado.email = contacto.email;
+        this.isEditing = false;
+      } else if (
+        !this.contacts.some(contactSome => contactSome.email == contacto.email)
       ) {
-        this.addContact(this.contact);
+        this.addContact(contacto);
       }
     },
     hideCalled() {
@@ -117,12 +136,10 @@ export default {
       );
     },
     editContact(contacto) {
-      console.log('Se va a editar al contacto '+contacto.name);
-      this.isEditing = true;
-      var inputName = document.getElementById('nombre');
-      var inputEmail = document.getElementById('email');
-      inputName.value = contacto.name;
-      inputEmail.value = contacto.email;
+      console.log("Se va a editar al contacto " + contacto.name);
+      this.isEditing = contacto.email;
+      this.contact = Object.assign({}, contacto);
+      console.log(contacto);
     },
     hideAll() {
       console.log("Ocultar todos");
