@@ -29,20 +29,25 @@ que es digital pues también podrías ponerle las siguientes opciones:-->
 
 *Un botón para marcar todos los todos como completados. -->
 
+<!--
+Con v-model asignamos el valor de dicho campo a una variable, previamente definnida en data()
+-->
+
 <template>
   <div class="agenda">
     <input id="nombre" type="text"  placeholder="Añadir nombre" v-model="contact.name">
     <input id="email" type="text" placeholder="Añadir Correo" v-model="contact.email"@keyup.enter="checkMail(contact)">
+    <!--Para el tema de los botones lo podriamos hacer así, o bien
+    1) Con un operador ternario: <button>{{ showed? Show called : Hide called }}</button> 
+    2) Haciendo que al hacer click me cambie el valor de la variable showed directamente, así me ahorro tener dos métodos
+    -->
     <button v-if="!showed"  @click.prevent="showAllCalled">Show called</button>
     <button v-else @click.prevent="hideCalled">Hide called</button>
     <button @click.prevent="hideAll">Hide/Show All</button>
     <button @click.prevent="removeAll">Remove All</button>
-    <div 
-    class="contacts" 
-    v-for="contact in contacts"
-    >
+    <div class="contacts" v-for="contact in contacts">
     <div class="contact" v-bind:class="{'completed': contact.called, 'hide': !contact.visible}">
-      <input type="checkbox" v-model="contact.called" name="contact" @click="called()">      
+      <input type="checkbox" v-model="contact.called" name="contact">      
       <span class="contact">Name: {{contact.name}} Email: {{contact.email}}</span>
       <button @click.prevent="deleteContact(contact)">Delete</button>
       <button @click.prevent="editContact(contact)">Edit</button>
@@ -85,15 +90,14 @@ export default {
       console.log("Añadir contacto");
       this.contacts.push(contacto);
       this.contact = {
+        // Lo he añadido aqui tambien por que si no me crea los usuarios sin el atricuto visible
+        // y me los oculta
         name: "",
         email: "",
         called: false,
         visible: true
       };
       console.log(this.contacts);
-    },
-    called() {
-      console.log("Contacto marcado como llamado");
     },
     checkMail(contacto) {
       if (!this.checkNameLength(this.contact.name)) {
