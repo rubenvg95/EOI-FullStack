@@ -4,7 +4,7 @@
         <input v-model="newTodo.text" placeholder="Insert todo" type="text" @keyup.enter="addNewTodoDB">
         <div class="todos" v-for="todo in todos">
             <div class="todo">
-                <input type="checkbox" v-model="todo.isCompleted" @click.prevent="complete(todo)">
+                <input type="checkbox" v-model="todo.isCompleted" @click.prevent="completeDB(todo)">
                 <span class="todo--text" v-bind:class="{'completed' : todo.isCompleted}">{{todo.text}}</span>
                 <button @click.prevent="deleteTodoFromDB(todo)">Delete</button>
             </div>
@@ -37,27 +37,14 @@ export default {
       axios
         .get(urlTodos)
         .then(response => {
-          this.normalizarDatos(response.data);
+          this.todos = response.data;
+          console.log(response.data);
         })
         .catch(err => {
           console.log(err.data);
         });
     },
-    normalizarDatos(todos) {
-      todos.forEach(todo => {
-        this.newTodo._id = todo._id;
-        this.newTodo.text = todo.text;
-        this.newTodo.isCompleted = todo.isCompleted;
-        this.newTodo.createdAt = todo.createdAt;
-        this.addTodo(this.newTodo);
-        this.newTodo = {
-          text: "",
-          isCompleted: false,
-          createdAt: 0
-        };
-      });
-    },
-    addTodo(todo) {
+    addNewTodo(todo) {
       this.newTodo._id = todo._id;
       this.newTodo.text = todo.text;
       this.newTodo.isCompleted = todo.isCompleted || false;
@@ -83,7 +70,7 @@ export default {
           .post(urlTodos, this.newTodo)
           .then(added => {
             this.newTodo._id = added.data._id;
-            this.addTodo(this.newTodo);
+            this.addNewTodo(this.newTodo);
           })
           .catch(errors => {
             alert(
@@ -92,7 +79,7 @@ export default {
             );
           });
       } else {
-        alert("Error, debes introducir algo mayor a 10 caracreres");
+        alert("Error, debes introducir algo mayor a 10 caracteres");
       }
     },
     deleteTodo(todo) {
@@ -113,24 +100,36 @@ export default {
           alert(error);
         });
     },
-    complete(todo) {
+    complete(todo, condition) {
+      console.log(todo);
       console.log(
-        "Se va a marcar el todo con id" + todo._id + " a " + !todo.isCompleted
+        "Se ha marcado el todo en local con id " +
+          todo._id +
+          " a " +
+          !todo.isCompleted
       );
+      todo.isCompleted = condition;
+    },
+    completeDB(todo) {
       //https://github.com/axios/axios/issues/897
       axios
-        .patch(urlTodos + "/" + todo._id, { isCompleted: !todo.isCompleted })
+        .patch(urlTodos + "/" + todo._id, {
+          isCompleted: !todo.isCompleted
+        })
         .then(response => {
-          console.log(response);
-          todo.isCompleted = response.data.isCompleted;
-          console.log(todo);
+          console.log(
+            "Se va a marcar el todo en DB con id " +
+              todo._id +
+              " a " +
+              !todo.isCompleted
+          );
+          this.complete(todo, response.data.isCompleted);
         })
         .catch(error => {
           console.log(error);
         });
     }
-  },
-  computed: {}
+  }
 };
 </script>
 
@@ -138,7 +137,6 @@ export default {
 .completed {
   text-decoration: line-through;
 }
-
 .todo {
   display: inline;
 }
