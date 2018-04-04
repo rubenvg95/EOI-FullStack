@@ -29,6 +29,7 @@ export default {
     };
   },
   created() {
+    //https://alligator.io/vuejs/rest-api-axios/
     this.recargarTodos();
   },
   methods: {
@@ -116,6 +117,7 @@ export default {
       console.log(
         "Se va a marcar el todo con id" + todo._id + " a " + !todo.isCompleted
       );
+      //https://github.com/axios/axios/issues/897
       axios
         .patch(urlTodos + "/" + todo._id, { isCompleted: !todo.isCompleted })
         .then(response => {
