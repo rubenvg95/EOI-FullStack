@@ -4,10 +4,9 @@
         <input v-model="newTodo.text" placeholder="Insert todo" type="text" @keyup.enter="addNewTodoDB">
         <div class="todos" v-for="todo in todos">
             <div class="todo">
-                <input type="checkbox" v-model="todo.isCompleted" >
-                {{todo.isCompleted}}
+                <input type="checkbox" v-model="todo.isCompleted" @click.prevent="complete(todo)">
                 <span class="todo--text" v-bind:class="{'completed' : todo.isCompleted}">{{todo.text}}</span>
-                <button>Delete</button>
+                <button @click.prevent="deleteTodoFromDB(todo)">Delete</button>
             </div>
         </div>
   </div>
@@ -50,7 +49,11 @@ export default {
         this.newTodo.isCompleted = todo.isCompleted;
         this.newTodo.createdAt = todo.createdAt;
         this.addTodo(this.newTodo);
-        this.newTodo = {};
+        this.newTodo = {
+          text: "",
+          isCompleted: false,
+          createdAt: 0
+        };
       });
     },
     addTodo(todo) {
@@ -66,20 +69,64 @@ export default {
       };
       console.log(this.todos);
     },
+    validatorFront(todo) {
+      if (todo.text.length >= 10) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     addNewTodoDB() {
+      if (this.validatorFront(this.newTodo)) {
+        axios
+          .post(urlTodos, this.newTodo)
+          .then(added => {
+            this.newTodo._id = added.data._id;
+            this.addTodo(this.newTodo);
+          })
+          .catch(errors => {
+            alert(
+              "No se ha podido publicar: " +
+                errors.response.data.errors.text.message
+            );
+          });
+      } else {
+        alert("Error, debes introducir algo mayor a 10 caracreres");
+      }
+    },
+    deleteTodo(todo) {
+      console.log("Deleting local " + todo._id);
+      this.todos = this.todos.filter(
+        todoABuscar => todoABuscar._id != todo._id
+      );
+    },
+    deleteTodoFromDB(todo) {
       axios
-        .post(urlTodos, this.newTodo)
-        .then(added => {
-          this.addTodo(this.newTodo);
+        .delete(urlTodos + "/" + todo._id)
+        .then(response => {
+          console.log("Deleting on DB " + todo._id);
+          this.deleteTodo(todo);
+          //console.log(response.data.ok);
         })
-        .catch(errors => {
-          alert(
-            "No se ha podido publicar: " +
-              errors.response.data.errors.text.message
-          );
+        .catch(error => {
+          alert(error);
         });
     },
-    
+    complete(todo) {
+      console.log(
+        "Se va a marcar el todo con id" + todo._id + " a " + !todo.isCompleted
+      );
+      axios
+        .patch(urlTodos + "/" + todo._id, { isCompleted: !todo.isCompleted })
+        .then(response => {
+          console.log(response);
+          todo.isCompleted = response.data.isCompleted;
+          console.log(todo);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   },
   computed: {}
 };
