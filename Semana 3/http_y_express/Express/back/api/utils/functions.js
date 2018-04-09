@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/Twitter');
 var userSchema = mongoose.Schema({
     username: {
         type: String,
-        require: [true, 'El campo username es necesario']
+        required: [true, 'El campo username es necesario']
     },
     name: {
         type: String
@@ -64,7 +64,6 @@ function checkUser(usuario) {
     //     return false;
     // }
     user.find({ username: usuario.username }, (err, res) => {
-        console.log('por aqui pasa')
         console.log(res);
     })
 }
